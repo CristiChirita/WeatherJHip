@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="temperature">
+            <h2><span jhiTranslate="weatherJHipApp.temperature.detail.title">Temperature</span> {{temperature.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="weatherJHipApp.temperature.continent">Continent</span></dt>
+                <dd>
+                    <span>{{temperature.continent}}</span>
+                </dd>
+                <dt><span jhiTranslate="weatherJHipApp.temperature.minTemperature">Min Temperature</span></dt>
+                <dd>
+                    <span>{{temperature.minTemperature}}</span>
+                </dd>
+                <dt><span jhiTranslate="weatherJHipApp.temperature.city">City</span></dt>
+                <dd>
+                    <span>{{temperature.city}}</span>
+                </dd>
+                <dt><span jhiTranslate="weatherJHipApp.temperature.country">Country</span></dt>
+                <dd>
+                    <span>{{temperature.country}}</span>
+                </dd>
+                <dt><span jhiTranslate="weatherJHipApp.temperature.maxTemperature">Max Temperature</span></dt>
+                <dd>
+                    <span>{{temperature.maxTemperature}}</span>
+                </dd>
+                <dt><span jhiTranslate="weatherJHipApp.temperature.cityMax">City Max</span></dt>
+                <dd>
+                    <span>{{temperature.cityMax}}</span>
+                </dd>
+                <dt><span jhiTranslate="weatherJHipApp.temperature.countryMax">Country Max</span></dt>
+                <dd>
+                    <span>{{temperature.countryMax}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/temperature', temperature.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

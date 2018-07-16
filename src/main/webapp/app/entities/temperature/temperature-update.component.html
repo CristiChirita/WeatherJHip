@@ -1,0 +1,59 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-temperature-heading" jhiTranslate="weatherJHipApp.temperature.home.createOrEditLabel">Create or edit a Temperature</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!temperature.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="temperature.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="weatherJHipApp.temperature.continent" for="field_continent">Continent</label>
+                    <input type="text" class="form-control" name="continent" id="field_continent"
+                        [(ngModel)]="temperature.continent" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="weatherJHipApp.temperature.minTemperature" for="field_minTemperature">Min Temperature</label>
+                    <input type="number" class="form-control" name="minTemperature" id="field_minTemperature"
+                        [(ngModel)]="temperature.minTemperature" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="weatherJHipApp.temperature.city" for="field_city">City</label>
+                    <input type="text" class="form-control" name="city" id="field_city"
+                        [(ngModel)]="temperature.city" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="weatherJHipApp.temperature.country" for="field_country">Country</label>
+                    <input type="text" class="form-control" name="country" id="field_country"
+                        [(ngModel)]="temperature.country" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="weatherJHipApp.temperature.maxTemperature" for="field_maxTemperature">Max Temperature</label>
+                    <input type="number" class="form-control" name="maxTemperature" id="field_maxTemperature"
+                        [(ngModel)]="temperature.maxTemperature" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="weatherJHipApp.temperature.cityMax" for="field_cityMax">City Max</label>
+                    <input type="text" class="form-control" name="cityMax" id="field_cityMax"
+                        [(ngModel)]="temperature.cityMax" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="weatherJHipApp.temperature.countryMax" for="field_countryMax">Country Max</label>
+                    <input type="text" class="form-control" name="countryMax" id="field_countryMax"
+                        [(ngModel)]="temperature.countryMax" />
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

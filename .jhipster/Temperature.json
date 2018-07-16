@@ -1,0 +1,43 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "continent",
+            "fieldType": "String",
+            "fieldValidateRules": []
+        },
+        {
+            "fieldName": "minTemperature",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "city",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "country",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "maxTemperature",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "cityMax",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "countryMax",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180716103357",
+    "dto": "no",
+    "searchEngine": false,
+    "service": "serviceClass",
+    "entityTableName": "temperature",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
+}

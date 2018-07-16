@@ -1,0 +1,34 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-blah-heading" jhiTranslate="weatherJHipApp.blah.home.createOrEditLabel">Create or edit a Blah</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!blah.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="blah.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="weatherJHipApp.blah.location" for="field_location">Location</label>
+                    <input type="text" class="form-control" name="location" id="field_location"
+                        [(ngModel)]="blah.location" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="weatherJHipApp.blah.continent" for="field_continent">Continent</label>
+                    <input type="text" class="form-control" name="continent" id="field_continent"
+                        [(ngModel)]="blah.continent" />
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
