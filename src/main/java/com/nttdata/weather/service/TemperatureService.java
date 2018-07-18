@@ -11,10 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+
 /**
  * Service Implementation for managing Temperature.
  */
@@ -37,7 +35,8 @@ public class TemperatureService {
      * @return the persisted entity
      */
     public Temperature save(Temperature temperature) {
-        log.debug("Request to save Temperature : {}", temperature);        return temperatureRepository.save(temperature);
+        log.debug("Request to save Temperature : {}", temperature);
+        return temperatureRepository.save(temperature);
     }
 
     /**
@@ -48,11 +47,12 @@ public class TemperatureService {
     @Transactional(readOnly = true)
     public List<Temperature> findAll() {
         log.debug("Request to get all Temperatures");
+        JSONParser parser = new JSONParser();
         String apiKey = "jKoDjpA4XoaueBd8j8LHVDfeJT72ACHR"; //Yes, I know this is awful
-        String string = new HttpClient().resolveRequest(apiKey, "currentconditions");
+        String weatherResponse = new HttpClient().resolveRequest(apiKey, "currentconditions");
         String regionData = new HttpClient().resolveRequest(apiKey, "locations");
-        List<WeatherBean> beans = null;
-        List<RegionBean> regionBeans = null;
+        List<WeatherBean> beans = new ArrayList<>();
+        final List<RegionBean> regionBeans = new ArrayList<>();
         List<String> continents = new ArrayList<>();
         continents.add("Europe");
         continents.add("Asia");
@@ -61,19 +61,24 @@ public class TemperatureService {
         continents.add("South America");
         continents.add("Antarctica");
         continents.add("Oceania");
-        JSONParser parser = new JSONParser();
-        if (string != null) {
-            beans = parser.parseJSON(string);
-            regionBeans = parser.parseRegionData(regionData);
+
+        if (weatherResponse != null) {
+            beans = parser.parseJSON(weatherResponse);
         }
-        if (beans != null) {
-            TemperaturePrinter printer = new TemperaturePrinter();
-            HashMap<String, ArrayList<WeatherBean>> groupedBeans;
-            groupedBeans = parser.groupByContinent(beans, regionBeans);
-            return printer.getExtremesPerContinent(groupedBeans);
-            //printer.getGlobalExtremes(beans);
+
+        if (regionData != null) {
+            regionBeans.addAll(parser.parseRegionData(regionData));
+
         }
-        return temperatureRepository.findAll();
+
+        TemperaturePrinter printer = new TemperaturePrinter();
+        HashMap<String, ArrayList<WeatherBean>> groupedBeans;
+        groupedBeans = parser.groupByContinent(beans, regionBeans);
+        List<Temperature> list = printer.getExtremesPerContinent(groupedBeans);
+        //Collections.sort(list);
+        return list;
+        //printer.getGlobalExtremes(beans);
+        // return temperatureRepository.findAll();
     }
 
 

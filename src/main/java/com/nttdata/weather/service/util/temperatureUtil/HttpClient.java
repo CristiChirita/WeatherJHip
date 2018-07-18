@@ -23,12 +23,13 @@ public class HttpClient {
         CloseableHttpResponse response;
         try {
             response = httpClient.execute(httpget);
-            //System.out.println(response.getProtocolVersion());
-            //System.out.println(response.getStatusLine().getStatusCode());
-            //System.out.println(response.getStatusLine().getReasonPhrase());
+            if(response.getStatusLine().getStatusCode() != 200) {
+                throw new RuntimeException("Invalid Response Code: " + response.getStatusLine().getStatusCode());
+            }
             log.debug(response.getStatusLine().toString());
             HttpEntity entity = response.getEntity();
             String string = EntityUtils.toString(entity);
+            response.close();
             //System.out.println(string);
             return string;
         } catch (IOException e) {

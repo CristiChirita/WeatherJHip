@@ -11,7 +11,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "temperature")
-public class Temperature implements Serializable {
+public class Temperature implements Serializable, Comparable<Temperature> {
 
     private static final long serialVersionUID = 1L;
 
@@ -174,5 +174,10 @@ public class Temperature implements Serializable {
             ", cityMax='" + getCityMax() + "'" +
             ", countryMax='" + getCountryMax() + "'" +
             "}";
+    }
+
+    @Override
+    public int compareTo(Temperature other) {
+        return continent.compareTo(other.continent);
     }
 }

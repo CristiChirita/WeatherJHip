@@ -21,8 +21,8 @@
             "city": "City",
             "country": "Country",
             "maxTemperature": "Max Temperature",
-            "cityMax": "City Max",
-            "countryMax": "Country Max"
+            "cityMax": "City",
+            "countryMax": "Country"
         }
     }
 }
